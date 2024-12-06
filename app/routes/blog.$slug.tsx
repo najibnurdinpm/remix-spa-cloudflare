@@ -15,33 +15,33 @@ import {
 } from "~/components/blog";
 import { Button } from "~/components/button";
 
-export const loader: LoaderFunction = async ({ params, request }) => {
-  const slug = params.slug;
-  const { origin } = new URL(request.url);
-  const baseUrl = origin;
+// export const loader: LoaderFunction = async ({ params, request }) => {
+//   const slug = params.slug;
+//   const { origin } = new URL(request.url);
+//   const baseUrl = origin;
 
-  if (!slug) throw new Response("Not found", { status: 404 });
+//   if (!slug) throw new Response("Not found", { status: 404 });
 
-  const post = await getPost(slug);
-  console.log("postttt", post);
-  const { frontmatter, code } = post;
+//   const post = await getPost(slug);
+//   console.log("postttt", post);
+//   const { frontmatter, code } = post;
 
-  const apiUrl = new URL(
-    `${baseUrl}/blog?topics=tutorials&technologies=${frontmatter[
-      "data-technologies"
-    ]?.join()}`
-  );
+//   const apiUrl = new URL(
+//     `${baseUrl}/blog?topics=tutorials&technologies=${frontmatter[
+//       "data-technologies"
+//     ]?.join()}`
+//   );
 
-  const generatedRecommendedPostData = (
-    await getPosts(1, 0, apiUrl.searchParams)
-  ).data;
+//   const generatedRecommendedPostData = (
+//     await getPosts(1, 0, apiUrl.searchParams)
+//   ).data;
 
-  if (post) {
-    return json({ frontmatter, code, baseUrl, generatedRecommendedPostData });
-  } else {
-    throw new Response("Not found", { status: 404 });
-  }
-};
+//   if (post) {
+//     return json({ frontmatter, code, baseUrl, generatedRecommendedPostData });
+//   } else {
+//     throw new Response("Not found", { status: 404 });
+//   }
+// };
 
 export const meta: V2_MetaFunction = ({ data, matches }: any) => {
   const parentMeta = matches
@@ -104,17 +104,17 @@ export const meta: V2_MetaFunction = ({ data, matches }: any) => {
 };
 
 export default function BlogDetail() {
-  const { code, frontmatter, generatedRecommendedPostData } = useLoaderData();
-  const Component = useMemo(() => getMDXComponent(code), [code]);
+  // const { code, frontmatter, generatedRecommendedPostData } = useLoaderData();
+  // const Component = useMemo(() => getMDXComponent(code), [code]);
 
-  const recommendedPostsData = getRecommendedPosts(
-    "tutorials",
-    frontmatter["data-technologies"]?.join()
-  );
+  // const recommendedPostsData = getRecommendedPosts(
+  //   "tutorials",
+  //   frontmatter["data-technologies"]?.join()
+  // );
 
   return (
     <>
-      <BlogDetailHeader
+      {/* <BlogDetailHeader
         title={frontmatter.title}
         description={frontmatter.description}
         author={frontmatter.author}
@@ -204,7 +204,7 @@ export default function BlogDetail() {
             }}
           />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

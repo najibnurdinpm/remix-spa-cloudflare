@@ -8,13 +8,13 @@ export default function Layout({ children }: ILayout) {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        {/* <Header /> */}
+        <Header />
         <main role="main" id="mainContent" className="flex-grow">
           {children}
         </main>
       </div>
-      {/* <BeforeFooter />
-      <Footer /> */}
+      <BeforeFooter />
+      <Footer />
     </>
   );
 }

@@ -1,6 +1,6 @@
 // import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "~/routes/resource.og";
-const OG_IMAGE_HEIGHT = 400;
-const OG_IMAGE_WIDTH = 400;
+const OG_IMAGE_WIDTH = 1200;
+const OG_IMAGE_HEIGHT = 630;
 
 import meta from "~/data/meta.json";
 

@@ -4,6 +4,9 @@ import satori from "satori";
 
 // import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "~/routes/resource.og";
 
+const OG_IMAGE_WIDTH = 1200;
+const OG_IMAGE_HEIGHT = 630;
+
 declare module "react" {
   interface HTMLAttributes<T> {
     tw?: string;
@@ -18,31 +21,31 @@ const fontSans = (baseUrl: string) =>
 
 export async function createOGImage(title: string, requestUrl: string) {
   const fontSansData = await fontSans(requestUrl);
-  // const options: SatoriOptions = {
-  //   width: OG_IMAGE_WIDTH,
-  //   height: OG_IMAGE_HEIGHT,
-  //   fonts: [
-  //     {
-  //       name: "Inter",
-  //       data: fontSansData,
-  //       style: "normal",
-  //     },
-  //   ],
+  const options: SatoriOptions = {
+    width: OG_IMAGE_WIDTH,
+    height: OG_IMAGE_HEIGHT,
+    fonts: [
+      {
+        name: "Inter",
+        data: fontSansData,
+        style: "normal",
+      },
+    ],
   };
 
   // Design the image and generate an SVG with "satori"
-  // const svg = await satori(
-  //   <div
-  //     style={{
-  //       width: OG_IMAGE_WIDTH,
-  //       height: OG_IMAGE_HEIGHT,
-  //       display: "flex",
-  //     }}
-  //   >
-  //     <img src={`${requestUrl}/assets/images/opengraph/static.png`} />,
-  //   </div>,
-  //   options
-  // );
+  const svg = await satori(
+    <div
+      style={{
+        width: OG_IMAGE_WIDTH,
+        height: OG_IMAGE_HEIGHT,
+        display: "flex",
+      }}
+    >
+      <img src={`${requestUrl}/assets/images/opengraph/static.png`} />,
+    </div>,
+    options
+  );
   // const svg = await satori(
   //   <div
   //     tw="bg-red-300"

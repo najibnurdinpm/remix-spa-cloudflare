@@ -1,6 +1,5 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { createOGImage } from "~/utils/createOGImage.server";
-import { useEffect } from "react";
 
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;

@@ -14,99 +14,99 @@ import { Button } from "~/components/button";
 import { Modal } from "~/components/global/Modal";
 import { BlogCard, BlogMenu, BlogPagintaion } from "~/components/blog";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const searchParams = new URL(request.url).searchParams;
-  const page: any = searchParams.get("page") || 1;
-  const limit: any = searchParams.get("limit") || 6;
+// export const loader: LoaderFunction = async ({ request }) => {
+//   const searchParams = new URL(request.url).searchParams;
+//   const page: any = searchParams.get("page") || 1;
+//   const limit: any = searchParams.get("limit") || 6;
 
-  const data = await getPosts(page, Number(limit), searchParams);
+//   const data = await getPosts(page, Number(limit), searchParams);
 
-  return defer(data);
-};
+//   return defer(data);
+// };
 
 export default function Blog() {
-  let post = useLoaderData<typeof loader>();
-  const [page, setPage] = useState(1);
-  const actionData = useActionData();
-  if (actionData) post = actionData;
+  // let post = useLoaderData<typeof loader>();
+  // const [page, setPage] = useState(1);
+  // const actionData = useActionData();
+  // if (actionData) post = actionData;
 
-  const { data, filters, currentPage, total, total_pages } = post;
+  // const { data, filters, currentPage, total, total_pages } = post;
 
-  const [searchParams, setSearchParams]: any = useSearchParams();
-  const location = useLocation();
+  // const [searchParams, setSearchParams]: any = useSearchParams();
+  // const location = useLocation();
 
-  const getCurrenFIlters: any[] = [];
-  const getCurrentPage: any = Number(searchParams.get("page")) || 1;
+  // const getCurrenFIlters: any[] = [];
+  // const getCurrentPage: any = Number(searchParams.get("page")) || 1;
 
-  //getCurrenFIlters data
-  for (let [key, value] of searchParams) {
-    if (key !== "page") {
-      if (value.includes(",")) {
-        value = value.split(",");
-      }
+  // //getCurrenFIlters data
+  // for (let [key, value] of searchParams) {
+  //   if (key !== "page") {
+  //     if (value.includes(",")) {
+  //       value = value.split(",");
+  //     }
 
-      if (typeof value === "object") {
-        value.map((j: any) => {
-          getCurrenFIlters.push({
-            key,
-            value: j,
-          });
-        });
-      } else {
-        getCurrenFIlters.push({
-          key,
-          value,
-        });
-      }
-    }
-  }
+  //     if (typeof value === "object") {
+  //       value.map((j: any) => {
+  //         getCurrenFIlters.push({
+  //           key,
+  //           value: j,
+  //         });
+  //       });
+  //     } else {
+  //       getCurrenFIlters.push({
+  //         key,
+  //         value,
+  //       });
+  //     }
+  //   }
+  // }
 
-  const [selectedState, setSelectedState] = useState({
-    filters: getCurrenFIlters,
-    page: getCurrentPage,
-  });
+  // const [selectedState, setSelectedState] = useState({
+  //   filters: getCurrenFIlters,
+  //   page: getCurrentPage,
+  // });
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  // const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleSetSearchParams = (
-    setState: any,
-    key: string,
-    selectedStateObject: any,
-    value: string,
-    activeFilters: boolean
-  ) => {
-    setState((prev: any) => {
-      if (!activeFilters) {
-        prev.set(
-          key,
-          [...new Set(selectedStateObject)]
-            .filter((v: any) => v.key === key && v.value)
-            .map((j: any) => j.key === key && j.value)
-            .join(prev.has(key) ? "," : "")
-        );
-      } else {
-        prev.set(
-          key,
-          [...new Set(selectedStateObject)]
-            .filter((v: any) => v.key === key && v.value !== value && v.value)
-            .map((j: any) => j.key === key && j.value)
-        );
-      }
-      if (prev.get(key).split(",").includes("")) {
-        prev.delete(key);
-      }
-      prev.set("page", 1);
-      return prev;
-    });
-  };
+  // const handleSetSearchParams = (
+  //   setState: any,
+  //   key: string,
+  //   selectedStateObject: any,
+  //   value: string,
+  //   activeFilters: boolean
+  // ) => {
+  //   setState((prev: any) => {
+  //     if (!activeFilters) {
+  //       prev.set(
+  //         key,
+  //         [...new Set(selectedStateObject)]
+  //           .filter((v: any) => v.key === key && v.value)
+  //           .map((j: any) => j.key === key && j.value)
+  //           .join(prev.has(key) ? "," : "")
+  //       );
+  //     } else {
+  //       prev.set(
+  //         key,
+  //         [...new Set(selectedStateObject)]
+  //           .filter((v: any) => v.key === key && v.value !== value && v.value)
+  //           .map((j: any) => j.key === key && j.value)
+  //       );
+  //     }
+  //     if (prev.get(key).split(",").includes("")) {
+  //       prev.delete(key);
+  //     }
+  //     prev.set("page", 1);
+  //     return prev;
+  //   });
+  // };
 
-  useEffect(() => {
-    setPage(getCurrentPage);
-  }, [location]);
+  // useEffect(() => {
+  //   setPage(getCurrentPage);
+  // }, [location]);
 
   return (
     <>
-      <Section
+      {/* <Section
         animation={false}
         titleSize="small"
         title={
@@ -163,7 +163,6 @@ export default function Blog() {
                 <span className="font-inter text-[18px] text-white">
                   Can't find the instructions you need?
                 </span>
-                {/* TODO: maybe add go to contact us or open chat section button*/}
                 <div className="flex gap-4">
                   <Button
                     to={"/blog"}
@@ -216,7 +215,7 @@ export default function Blog() {
           setPage={setPage}
           setSearchParams={setSearchParams}
         />
-      )}
+      )} */}
     </>
   );
 }

@@ -161,7 +161,7 @@ export default function Index() {
           </>
         }
       >
-        {/* <CodeSection
+        <CodeSection
           image={previewCodePage.image}
           selectedPreviewPage={previewCodePage}
           customTitle={
@@ -184,7 +184,7 @@ export default function Index() {
             Liquid: dynamicIntegrationLiquid,
             Webflow: dynamicIntegrationWebflow,
           }}
-        /> */}
+        />
       </Section>
 
       <Section

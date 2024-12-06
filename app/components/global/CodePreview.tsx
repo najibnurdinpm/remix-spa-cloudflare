@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CardGradient } from "../card";
+import type { Highlighter } from 'shiki';
 
 type ICodePreview = {
   code: string;
@@ -13,20 +14,43 @@ export default function CodePreview({
   withWindow = false,
   showLineNumber = true,
 }: ICodePreview) {
-  let [highlighter, setHighlighter]: any = useState();
+  // let [highlighter, setHighlighter]: any = useState();
+  const [highlighter, setHighlighter] = useState<Highlighter | null>(null);
+
 
   useEffect(() => {
-    import("shiki").then((d) => {
-      d.getHighlighter({
-        theme: "css-variables",
-        langs: ["liquid", "shellscript"],
-        paths: {
-          languages: "../assets/shiki/languages",
-          themes: "../assets/shiki/themes",
-          wasm: "../assets/shiki",
-        },
-      }).then((d) => setHighlighter(d));
-    });
+    // import("shiki").then((d) => {
+    //   d.getHighlighter({
+    //     theme: "css-variables",
+    //     langs: ["liquid", "shellscript"],
+    //     paths: {
+    //       languages: "../assets/shiki/languages",
+    //       themes: "../assets/shiki/themes",
+    //       wasm: "../assets/shiki",
+    //     },
+    //   }).then((d) => setHighlighter(d));
+    // });
+
+    async function loadHighlighter() {
+      try {
+        const shiki = await import('shiki');
+        const highlighterInstance = await shiki.getHighlighter({
+          theme: "css-variables",
+          langs: ["liquid", "shellscript"],
+          paths: {
+            languages: "/assets/shiki/languages",
+            themes: "/assets/shiki/themes",
+            wasm: "/assets/shiki",
+          },
+        });
+        setHighlighter(highlighterInstance);
+      } catch (error) {
+        console.error('Failed to load highlighter', error);
+      }
+    }
+
+    loadHighlighter();
+
   }, []);
 
   return (
@@ -40,12 +64,13 @@ export default function CodePreview({
               </code>
             </pre>
           ) : (
-            <div
-              className="font-firacode"
-              dangerouslySetInnerHTML={{
-                __html: highlighter.codeToHtml(code, { lang: language }),
-              }}
-            />
+            <></>
+            // <div
+            //   className="font-firacode"
+            //   dangerouslySetInnerHTML={{
+            //     __html: `<pre>${highlighter.codeToHtml(code, { lang: language })}</pre>`,
+            //   }}
+            // />
           )}
         </div>
       ) : (

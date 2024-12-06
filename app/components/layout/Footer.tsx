@@ -19,9 +19,9 @@ const additionalFooterLinks = [
 
 export default function Footer() {
   useEffect(() => {
-    (function (d, t) {
-      var g: any = d.createElement(t),
-        s: any = d.getElementsByTagName(t)[0];
+    (function (d = document, t = 'script') {
+      const g = d.createElement(t);
+      const s = d.getElementsByTagName(t)[0] ?? document.body;
       g.src = CHATWOOT_URL + "/packs/js/sdk.js";
       g.defer = true;
       g.async = true;
