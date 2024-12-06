@@ -1,0 +1,227 @@
+---
+title: "How to create Wishlist in Hydrogen"
+subtitle: "A Wishlist allows your customers to curate a personalized collection of products they desire, but may not be ready to purchase immediately."
+description: "A Wishlist allows your customers to curate a personalized collection of products they desire, but may not be ready to purchase immediately."
+date: 2023-07-26
+image: "/assets/images/blogs/create-wishlist.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["wishlist"]
+data-technologies: ["hydrogen"]
+---
+
+<RecommendedPosts type="card" autoGenerate/>
+
+export const triggerCode = `import {Trigger} from "@sledge-app/react-wishlist";
+// ...
+
+export function ProductCard() {
+  // ...
+  
+  // place the following code in the desired position
+  <Trigger
+    params={{
+      productId: parseGid(product.id).id,
+      productVariantId: parseGid(firstVariant.id).id,
+      productName: product.title,
+      productVendor: product.vendor,
+      productSku: firstVariant.sku || '',
+      productVariantName: firstVariant.title,
+      productLink: url product,
+      productImage: image?.url,
+      productCurrency: firstVariant.price.currencyCode,
+      productPrice: firstVariant.price.amount,
+    }}
+  />
+
+// ...
+}`;
+
+export const buttonDetailCode = `import {ButtonDetail} from "@sledge-app/react-wishlist";
+// ...
+
+export default function MainProduct() {
+  // ...
+  
+  // place the following code bottom of add to cart or checkout button
+  <ButtonDetail
+    params={{
+      productId: parseGid(product.id).id,
+      productVariantId: parseGid(firstVariant.id).id,
+      productName: product.title,
+      productVendor: product.vendor,
+      productSku: firstVariant.sku || '',
+      productVariantName: firstVariant.title,
+      productLink: url product,
+      productImage: image?.url,
+      productCurrency: firstVariant.price.currencyCode,
+      productPrice: firstVariant.price.amount,
+    }}
+  />
+
+// ...
+}`;
+
+export const badgeCode = `import { Link } from '@remix-run/react';
+import { Badge } from "@sledge-app/react-wishlist";
+// ...
+
+export function Header(){
+  // ...
+
+return(
+// ...
+
+    // fill link to with url of your wishlist page
+    <Link className="mt-[-1px]" to="/wishlist">
+      <Badge.Root>
+        <Badge.HeaderMenu />
+      </Badge.Root>
+    </Link>
+
+    // ...
+
+)
+}`;
+
+export const wishListCode = `import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+// ...
+
+export function WishlistPage(){
+  // ...
+
+return(
+// ...
+
+    <Widget.Root
+      customRoutePage="/wishlist"
+      query={{
+        shareId: "share",
+      }}
+    >
+      <WidgetHeader>
+        <WidgetHeader.Title text="My Wishlist" />
+        <WidgetHeader.SearchForm placeholder="Search product" />
+        <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+        <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+        <WidgetHeader.Sort />
+        <WidgetHeader.Limit options={[10, 25, 50, 100]} />
+      </WidgetHeader>
+      <Widget.List gridType="large" />
+    </Widget.Root>
+
+    // ...
+
+)
+}`;
+
+## What we’re building
+
+In this tutorial we’ll be learning how to add Wishlist app for Shopify Hydrogen. Learning how to add: <br/>
+1 Wishlist trigger <br/>
+2 Wishlist button detail <br/>
+3 Wishlist badge <br/>
+4 Wishlist list <br/>
+
+<br />
+<Info content={
+  <>
+  This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://remix.run/" target="_blank">Remix</a>, <a href="https://hydrogen.shopify.dev/" target="_blank">Shopify Hydrogen</a> and has been setup <a href="/blog/how-to-add-sledge-provider-in-shopify-hydrogen" target="_blank">Sledge Provider</a>.
+  </>
+} />
+
+## Install sledge react wishlist
+
+The first step to do is install the Sledge react wishlist package,
+run the following command to install Sledge react wishlist:
+
+<CodeMDX
+  showLineNumber={false}
+  code={`npm install @sledge-app/react-wishlist`}
+  withWindow={true}
+  language="shellscript"
+/>
+
+## Add wishlist trigger
+
+So that users can add one of the products to the wishlist when viewing the product list, we need to add a wishlist trigger to the product card component.<br/>
+
+<br />
+<img src="/assets/images/blogs/wishlist-trigger.png" alt="Wishlist Trigger" />
+<br />
+
+Add the following code to product card component:
+
+<CodeMDX
+  showLineNumber={false}
+  code={triggerCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/components/Global/ProductCard.tsx#L46-L59"
+>
+  <span>See Example Code</span>
+</Button>
+<br />
+
+## Add wishlist button detail
+
+Apart from the product card, we also need to add a wishlist button detail on the product details page so that customers can still add products to the wishlist.
+<br/>
+<img src="/assets/images/blogs/wishlist-button.png" alt="Wishlist Button" />
+<br/>
+Add the following code to product detail page:
+
+<CodeMDX
+  showLineNumber={false}
+  code={buttonDetailCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+## Add wishlist badge
+
+Then, so that customers know the number of products on the wishlist, we need to add a wishlist badge to header menu.
+The wishlist badge is also useful as a link to the wishlist page. <br/>
+<br />
+<img src="/assets/images/blogs/wishlist-badge.png" alt="Wishlist Badge" />
+<br />
+Add the following code to header menu component:
+
+<CodeMDX
+  showLineNumber={false}
+  code={badgeCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/components/Layout/Header.tsx#L130-L134"
+>
+  <span>See Example Code</span>
+</Button>
+<br />
+
+## Add wishlist list
+
+Finally we need to create a page that displays the wishlist that customers have, customers can easily add wishlists to cart, search wishlist, delete wishlists and even share wishlists with other users. <br/>
+<br />
+<img src="/assets/images/blogs/wishlist-page.png" alt="Wishlist Badge" />
+<br />
+Add the following code to wishlist page:
+
+<CodeMDX
+  showLineNumber={false}
+  code={wishListCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/routes/(%24locale).pages.%24pageHandle.tsx#L115-L135"
+>
+  <span>See Example Code</span>
+</Button>

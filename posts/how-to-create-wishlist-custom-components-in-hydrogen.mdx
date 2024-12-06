@@ -1,0 +1,136 @@
+---
+title: "How to create Wishlist custom components in Hydrogen"
+subtitle: "Make the appearance of the Sledge wishlist app remain in line with the theme you have using the custom components that Sledge provides."
+description: "Make the appearance of the Sledge wishlist app remain in line with the theme you have using the custom components that Sledge provides."
+date: 2023-11-08
+image: "/assets/images/blogs/create-wishlist.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["wishlist","custom-components"]
+data-technologies: ["hydrogen"]
+---
+
+<RecommendedPosts type="card" autoGenerate/>
+
+## What we’re building
+
+In this tutorial we’ll be learning how to create Wishlist custom component for Shopify Hydrogen. Learning how to add: <br/>
+1 Custom widget alert<br/>
+2 Custom product card
+<br/>
+<Info content={
+  <>
+    This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://remix.run/" target="_blank">Remix</a>, <a href="https://hydrogen.shopify.dev/" target="_blank">Shopify Hydrogen</a> and has been setup <a href="/blog/how-to-create-wishlist-in-shopify-hydrogen" target="_blank">Wishlist app</a> for Shopify Hydrogen.
+  </>
+} />
+
+## Custom widget alert
+On the wishlist page at the top there is a alert for customers who have not logged in so they don't lose the wishlist that has been added, we can modify its appearance using a custom component. Follow these steps to change the alert display.
+<br />
+<img src="/assets/images/blogs/wishlist-alert.png" alt="Wishlist Badge" />
+<br/>
+Create file ***components/sledge/custom-components/WishlistAlert.tsx*** and copy the following code for creating custom wishlist alert component:
+<CodeMDX
+  showLineNumber={false}
+  code={`import {Link} from "@remix-run/react";
+
+export default function WishlistAlert() {
+  return (
+    // you can adjust this code with yout wishlist alert code
+    <div className="p-4 bg-yellow-500">
+      Please login to save your wishlist across devices.
+      <Link to="/login">
+        <span className="ml-1">Login Here</span>
+      </Link>
+    </div>
+  );
+}
+`}
+  withWindow={true}
+  language="javascript"
+/>
+
+Add WishlistAlert component to wishlist page.
+<CodeMDX
+  showLineNumber={false}
+  code={`import { CustomComponents } from "@sledge-app/core";
+import WishlistAlert from "~/components/sledge/custom-components/WishlistAlert";
+import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+// ...
+
+export default function WishlistPage() {
+  return(
+    <Widget.Root>
+      <CustomComponents wishlistWidgetAlert={ WishlistAlert } />
+
+      // ...
+    </Widget.Root>
+  )
+}
+`}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/routes/(%24locale).pages.%24pageHandle.tsx#L123"
+>
+  <span>See Example Code</span>
+</Button>
+
+## Custom product card
+We can change the appearance of the product card on the wishlist page according to what we want.
+Follow these steps to change the appearance of the product card on the wishlist page:
+<br/>
+<img src="/assets/images/blogs/wishlist-page.png" alt="Wishlist Badge" />
+<br/>
+Create file ***components/sledge/custom-components/ProductCard.tsx*** and copy the following code for creating custom product card component:
+<CodeMDX
+  showLineNumber={false}
+  code={`import {Link} from '@remix-run/react';
+
+export default function ProductCard({product, sourceApp}: any) {
+  return (
+    // you can adjust this code with yout product card code
+    <Link 
+      to={\`/products/\${product.handle}\`}
+      className="border border-black"
+    >
+      <img src={product.image?.src || ''} alt={product.title} />
+      <div className="p-4">{product.title}</div>
+    </Link>
+  );
+}
+`}
+  withWindow={true}
+  language="javascript"
+/>
+
+Add ProductCard component to wishlist page.
+<CodeMDX
+  showLineNumber={false}
+  code={`import { CustomComponents } from "@sledge-app/core";
+import ProductCard from '~/components/sledge/custom-components/ProductCard';
+import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+// ...
+
+export default function WishlistPage() {
+  return(
+    <Widget.Root>
+      <CustomComponents productCard={ ProductCard } />
+
+      // ...
+    </Widget.Root>
+  )
+}
+`}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/routes/(%24locale).pages.%24pageHandle.tsx#L124"
+>
+  <span>See Example Code</span>
+</Button>

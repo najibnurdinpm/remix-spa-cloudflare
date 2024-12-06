@@ -1,0 +1,115 @@
+---
+title: "How to add Sledge Provider in Hydrogen"
+subtitle: "Sledge Provider used to manage global application state, configuration, and provide context to other sledge components."
+description: "Sledge Provider used to manage global application state, configuration, provide context, store and share data or functionality that multiple parts of the application need access to."
+date: 2023-10-24
+image: "/assets/images/blogs/intro-sledge.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["core"]
+data-technologies: ["hydrogen"]
+---
+
+export const code1 = `import sledgeCss from '@sledge-app/core/style.css';
+// ...
+
+export const links: LinksFunction = () => {
+  return [
+    // ...
+
+    {rel: 'stylesheet', href: sledgeCss}
+
+]
+}
+`;
+
+export const code2 = `import {SledgeProvider} from '@sledge-app/core';
+// ...
+
+export default function App() {
+  // ...
+
+return (
+// ...
+
+    <body>
+      <SledgeProvider
+        apiKey=""
+        instantSearchApiKey=""
+        userId=""
+        userEmail=""
+        userFullname=""
+      >
+        // ...
+        <Outlet />
+
+      </SledgeProvider>
+    </body>
+
+)
+}
+`;
+
+<RecommendedPosts type="card" autoGenerate/>
+<br />
+
+In this tutorial we will add a sledge provider that will be used by all sledge applications.
+
+<br />
+
+<Info content={
+  <>
+  This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://remix.run/" target="_blank">Remix</a> and <a href="https://hydrogen.shopify.dev/" target="_blank">Shopify Hydrogen</a>.
+  </>
+} />
+
+## Install Sledge Core
+
+Run the following command to install sledge core:
+
+<CodeMDX
+  showLineNumber={false}
+  code={`npm install @sledge-app/core`}
+  withWindow={true}
+  language="shellscript"
+/>
+
+## Import Sledge css
+
+Sledge provides css that needs to be imported into **_app/root.tsx_**.
+
+<CodeMDX
+  showLineNumber={false}
+  code={code1}
+  withWindow={true}
+  language="javascript"
+/>
+
+## Setup Sledge Provider
+
+The sledge Provider needs add to **_app/root.tsx_** to wrap the components of another sledge application.
+
+<CodeMDX
+  showLineNumber={false}
+  code={code2}
+  withWindow={true}
+  language="javascript"
+/>
+
+Fill **_apiKey_** and **_instantSearchApiKey_** from Shopify Admin › Apps › Sledge › General › API Key.
+
+<a href="https://docs.sledge-app.com/backend-general#api-key" target="blank">
+  See documentation
+</a>
+.<br />
+And fill ***userId***, ***userEmail*** and ***userFullname*** with data of the
+currently logged in user.
+
+<br />
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/main/hydrogen/app/root.tsx"
+>
+  <span>See Example Code</span>
+</Button>

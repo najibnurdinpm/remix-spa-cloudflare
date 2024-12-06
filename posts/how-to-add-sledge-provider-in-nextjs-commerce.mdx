@@ -1,0 +1,138 @@
+---
+title: "How to add Sledge Provider in in Next.js Commerce"
+subtitle: "Sledge Provider used to manage global application state, configuration, and provide context to other sledge components."
+description: "Sledge Provider used to manage global application state, configuration, provide context, store and share data or functionality that multiple parts of the application need access to."
+date: 2023-11-06
+image: "/assets/images/blogs/intro-sledge.png"
+author: "Berry Prana"
+authorImage: "/assets/images/author/author-berry.jpg"
+data-topics: ["tutorials"]
+data-apps: ["core"]
+data-technologies: ["next.js"]
+---
+
+export const code1 = `import "@sledge-app/core/style.css";
+// ...
+`;
+
+export const SledgeProviderCode = `"use client";
+
+import { SledgeProvider } from "@sledge-app/core";
+
+export default function SledgeProviderComponent({
+  children,
+  apiKey,
+  instantSearchApiKey,
+  userId,
+  userEmail,
+  userFullname,
+  sledgeSession,
+  sledgeSettings,
+}: any) {
+  return (
+    <SledgeProvider
+      apiKey={apiKey}
+      instantSearchApiKey={instantSearchApiKey}
+      userId={userId}
+      userEmail={userEmail}
+      userFullname={userFullname}
+      sledgeSession={sledgeSession}
+      sledgeSettings={sledgeSettings}
+    >
+      {children}
+    </SledgeProvider>
+  );
+}`;
+
+export const code2 = `import "@sledge-app/core/style.css";
+import SledgeProviderComponent from "components/sledge/sledge-provider-component";
+// ...
+
+export default async function RootLayout() {
+  return (
+    // ...
+    
+      <body>
+        <SledgeProviderComponent
+          apiKey=""
+          instantSearchApiKey=""
+          userId=""
+          userEmail=""
+          userFullname=""
+        >
+          {/* Main content */}
+        </SledgeProviderComponent>
+      </body>
+  );
+}
+`;
+
+<RecommendedPosts type="card" autoGenerate/>
+<br />
+
+In this tutorial we will add a sledge provider that will be used by all sledge applications.
+
+<br />
+<Info content={
+  <>
+    This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank">React</a>, <a href="https://nextjs.org/" target="_blank">Next.js</a> and <a href="https://nextjs.org/commerce" target="_blank">Next Commerce</a>.
+  </>
+} />
+
+## Install Sledge Core
+
+Run the following command to install sledge core:
+
+<CodeMDX
+  showLineNumber={false}
+  code={`npm install @sledge-app/core`}
+  withWindow={true}
+  language="shellscript"
+/>
+
+## Import Sledge css
+
+Sledge provides css that needs to be imported into **_app/layout.tsx_**.
+
+<CodeMDX
+  showLineNumber={false}
+  code={code1}
+  withWindow={true}
+  language="javascript"
+/>
+
+## Setup Sledge Provider
+
+Create file ***components/sledge/sledge-provider-component.tsx*** and copy the following code for creating Sledge provider component.
+<CodeMDX
+  showLineNumber={false}
+  code={SledgeProviderCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+Sledge provider component needs add to **_app/layout.tsx_** to wrap the components of another sledge application.
+
+<CodeMDX
+  showLineNumber={false}
+  code={code2}
+  withWindow={true}
+  language="javascript"
+/>
+
+Fill **_apiKey_** and **_instantSearchApiKey_** from Shopify Admin › Apps › Sledge › General › API Key.
+
+<a href="https://docs.sledge-app.com/backend-general#api-key" target="blank">
+  See documentation
+</a>
+.<br />
+And fill ***userId***, ***userEmail*** and ***userFullname*** with data of the
+currently logged in user.
+
+<br />
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/app/layout.tsx"
+>
+  <span>See Example Code</span>
+</Button>

@@ -1,0 +1,124 @@
+---
+title: "How to create \"suggestionKeywordList\" Component for Instant Search App in Hydrogen"
+subtitle: "A \"suggestionKeywordList\" on instant search is a feature that allows users to create a personalized set of keywords or phrases to enhance customers search experience. "
+description: "A \"suggestionKeywordList\" on instant search is a feature that allows users to create a personalized set of keywords or phrases to enhance customers search experience. "
+date: 2023-11-10
+image: "/assets/images/blogs/create-instant-search-hydrogen.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["instant-search","custom-components"]
+data-technologies: ["hydrogen"]
+---
+
+<RecommendedPosts type="card" autoGenerate/>
+
+## What we’re building
+In this tutorial we’ll be learning how to create custom component for displaying list of suggestion keywords on Instant search popup widget when no characters are typed or no search result.
+<br />
+<img src="/assets/images/blogs/suggestion-keyword-list.png" alt="suggestionKeywordList" />
+<br />
+<Info content={
+  <>
+    This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://remix.run/" target="_blank">Remix</a>, <a href="https://hydrogen.shopify.dev/" target="_blank">Shopify Hydrogen</a> and has been setup <a href="/blog/how-to-create-instant-search-in-shopify-hydrogen" target="_blank">Instant search app</a> for Shopify Hydrogen.
+  </>
+} />
+
+## Activate Suggestion Feature
+Before creating a custom component for suggested keyword list, we need to activate suggestion feature and add several keywords.<br/>
+Open ***Sledge App*** › ***Instant Search & Product Filters*** › ***Customize*** › ***Search tab***, on Suggestion menu check ***Enable keyword suggestion*** and add ***Keywords***.
+<br/>
+<img src="/assets/images/blogs/suggestion-keyword-settings.png" alt="Suggestion keyword settings" width="370" />
+
+## Create component
+After the suggestion feature is activated and keywords have been added, to display it as desired, we need to create a new component.<br/>
+Create file ***components/sledge/custom-components/SledgeSuggestionKeywordList.tsx*** and copy the following code for creating custom "suggestionKeywordList" component.
+<CodeMDX
+  showLineNumber={false}
+  code={`import { Link } from "@remix-run/react";
+
+export default function SledgeSuggestionKeywordList({
+  keywords,
+  setShowPopupComponent,
+  setRenderSearchResult,
+}: any) {
+  return (
+    <>
+      <div className="sledge-instant-search__icon-widget-search-form-result-title">
+        Suggestions
+      </div>
+      <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+        {keywords.map((keyword: string, index: number) => {
+          return (
+            <li key={index}>
+              <Link
+                // adjust to value with your search result page urls
+                to={\`/pages/search-result?q=\${keyword}\`}
+                className="sledge-instant-search__icon-widget-search-form-result-list-link sledge-instant-search__icon-widget-search-form-result-list-link-suggestion"
+                onClick={() => {
+                  setShowPopupComponent && setShowPopupComponent(false);
+                  setRenderSearchResult && setRenderSearchResult(keyword);
+                }}
+              >
+                <span className="sledge-icon__search">
+                  <svg
+                    width={12}
+                    height={12}
+                    viewBox="0 0 20 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M9.78283 2.16669C14.2578 2.16669 17.8978 5.80669 17.8978 10.2817C17.8978 12.393 17.0876 14.3186 15.7617 15.7638L18.3707 18.3673C18.6148 18.6114 18.6157 19.0064 18.3715 19.2506C18.2498 19.3739 18.089 19.4348 17.929 19.4348C17.7698 19.4348 17.6098 19.3739 17.4873 19.2523L14.8469 16.6192C13.4579 17.7316 11.6967 18.3975 9.78283 18.3975C5.30783 18.3975 1.66699 14.7567 1.66699 10.2817C1.66699 5.80669 5.30783 2.16669 9.78283 2.16669ZM9.78283 3.41669C5.99699 3.41669 2.91699 6.49585 2.91699 10.2817C2.91699 14.0675 5.99699 17.1475 9.78283 17.1475C13.5678 17.1475 16.6478 14.0675 16.6478 10.2817C16.6478 6.49585 13.5678 3.41669 9.78283 3.41669Z"
+                      fill="#677487"
+                    />
+                  </svg>
+                </span>{' '}
+                {keyword}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </>
+  );
+};`}
+  withWindow={true}
+  language="javascript"
+/>
+
+## Assign component
+After component is created, we need to assign it to search icon popup component in header menu component.<br/>
+<CodeMDX
+  showLineNumber={false}
+  code={`import { CustomComponents } from "@sledge-app/core";
+import SledgeSuggestionKeywordList from '~/components/sledge/custom-components/SledgeSuggestionKeywordList';
+// ...
+
+export function Header() {
+  // ...
+
+  return (
+    // ...
+
+    <SearchIconWidget size="sm">
+      <CustomComponents
+        suggestionKeywordList={ SledgeSuggestionKeywordList }
+      />
+    </SearchIconWidget>
+
+    // ...
+  )
+}
+`}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/components/Layout/Header.tsx#L126"
+>
+  <span>See Example Code</span>
+</Button>

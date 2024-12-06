@@ -1,0 +1,112 @@
+---
+title: "How to create Instant Search in Hydrogen"
+subtitle: "Instant search is required in online stores to enhance the user experience, streamline product discovery, reduce friction, and ultimately drive sales and customer satisfaction."
+description: "Instant search is required in online stores to enhance the user experience, streamline product discovery, reduce friction, and ultimately drive sales and customer satisfaction. It has become an essential tool for modern e-commerce websites looking to stay competitive in the market."
+date: 2023-11-03
+image: "/assets/images/blogs/create-instant-search-hydrogen.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["instant-search"]
+data-technologies: ["hydrogen"]
+---
+
+export const searchIconCode = `import { SearchIconWidget } from "@sledge-app/react-instant-search";
+// ...
+
+export function Header(){
+  // ...
+
+  return(
+    // ...
+  
+    <SearchIconWidget size="sm" />
+    // ...
+  
+  )
+}`;
+
+export const searchResultCode = `import { SearchResultWidget } from "@sledge-app/react-instant-search";
+
+export default function SearchResultPage() {
+  return (
+    <SearchResultWidget
+      query={{
+        keyword: 'q',
+      }}
+    />
+  );
+}
+`;
+
+<RecommendedPosts type="card" autoGenerate/>
+
+## What we’re building
+In this tutorial we’ll be learning how to add instant search icon popup on header menu and search result page for Shopify Hydrogen.
+
+<br />
+<img src="/assets/images/blogs/wishlist-badge.png" />
+<br />
+<img src="/assets/images/blogs/search-result.png" />
+
+<br />
+<Info content={
+  <>
+  This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://remix.run/" target="_blank">Remix</a>, <a href="https://hydrogen.shopify.dev/" target="_blank">Shopify Hydrogen</a> and has been setup <a href="/blog/how-to-add-sledge-provider-in-shopify-hydrogen" target="_blank">Sledge Provider</a>.
+  </>
+} />
+
+## Install sledge react instant search
+The first step to do is install the Sledge react instant search package,
+run the following command to install Sledge react instant search:
+
+<CodeMDX
+  showLineNumber={false}
+  code={`npm install @sledge-app/react-instant-search`}
+  withWindow={true}
+  language="shellscript"
+/>
+
+## Add search icon popup
+Then we need to add a popup search icon into the header menu as a trigger to open the popup search widget.<br/>
+Add the following code to header menu component:
+
+<br />
+<img src="/assets/images/blogs/wishlist-badge.png" />
+<br />
+
+<CodeMDX
+  showLineNumber={false}
+  code={searchIconCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/components/Layout/Header.tsx#L121-L128"
+>
+  <span>See Example Code</span>
+</Button>
+
+<br />
+
+## Add search result widget
+Finally we need to create a new page to display search results. <br/>
+<br />
+<img src="/assets/images/blogs/search-result.png" />
+<br />
+Copy the following code to search result page:
+<CodeMDX
+  showLineNumber={false}
+  code={searchResultCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/routes/(%24locale).pages.%24pageHandle.tsx#L55-L65"
+>
+  <span>See Example Code</span>
+</Button>

@@ -1,0 +1,123 @@
+---
+title: "How to create \"otherIndexList\" Component for Instant Search App in Hydrogen"
+subtitle: "\"otherIndexList\" component is used to display search results from collections, pages, blogs, and articles in search popups."
+description: "\"otherIndexList\" component is used to display search results from collections, pages, blogs, and articles in search popups."
+date: 2023-11-10
+image: "/assets/images/blogs/create-instant-search-hydrogen.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["instant-search","custom-components"]
+data-technologies: ["hydrogen"]
+---
+
+<RecommendedPosts type="card" autoGenerate/>
+
+## What we’re building
+
+In this tutorial we’ll be learning how to create custom component for displaying result of collections, pages, blogs, and articles on Instant search popup widget.
+<br/>
+<img src="/assets/images/blogs/search-popup.png" alt="Search popup" />
+<br />
+<Info content={
+  <>
+    This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://remix.run/" target="_blank">Remix</a>, <a href="https://hydrogen.shopify.dev/" target="_blank">Shopify Hydrogen</a> and has been setup <a href="/blog/how-to-create-instant-search-in-shopify-hydrogen" target="_blank">Instant search app</a> for Shopify Hydrogen.
+  </>
+} />
+
+## Create component
+The first step we have to do is create a component, create file ***components/sledge/custom-components/SledgeOtherIndexList.tsx*** and copy the following code for creating custom "otherIndexList" component.
+<CodeMDX
+  showLineNumber={false}
+  code={`import { Link } from "@remix-run/react";
+
+export default function SledgeOtherIndexList({
+  name,
+  items,
+  setShowPopupComponent,
+}: any) {
+  return (
+    <>
+      <div className="sledge-instant-search__icon-widget-search-form-result-title">
+        {name}
+      </div>
+      {items?.length ? (
+        <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+          {items.map((hit: any, index: number) => {
+            const {title, handle, blog_handle} = hit;
+
+            let linkTo = '';
+            
+            // adjust linkTo value with your url path for each index
+            if (String(name)?.toLowerCase().includes('collections')) {
+              linkTo = \`/collections/\${handle}\`;
+            } else if (String(name)?.toLowerCase().includes('pages')) {
+              linkTo = \`/pages/\${handle}\`;
+            } else if (String(name)?.toLowerCase().includes('blogs')) {
+              linkTo = \`/blogs/\${handle}\`;
+            } else if (String(name)?.toLowerCase().includes('articles')) {
+              linkTo = \`/blogs/\${blog_handle}/\${handle}\`;
+            }
+
+            return (
+              <li key={index}>
+                <Link
+                  to={linkTo}
+                  className="sledge-instant-search__icon-widget-search-form-result-list-link"
+                  onClick={() =>
+                    setShowPopupComponent && setShowPopupComponent(false)
+                  }
+                >
+                  {title}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        // display for no result
+        <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+          <li className="sledge-instant-search__icon-widget-search-form-result-item-disabled">
+            No {name?.toLowerCase()} were found
+          </li>
+        </ul>
+      )}
+    </>
+  );
+}
+`}
+  withWindow={true}
+  language="javascript"
+/>
+
+## Assign component
+After the component is created, we need to assign it to search icon popup component in header menu component.<br/>
+<CodeMDX
+  showLineNumber={false}
+  code={`import { CustomComponents } from "@sledge-app/core";
+import SledgeOtherIndexList from '~/components/sledge/custom-components/SledgeOtherIndexList';
+// ...
+
+export function Header() {
+  // ...
+
+  return (
+    // ...
+
+    <SearchIconWidget size="sm">
+      <CustomComponents otherIndexList={SledgeOtherIndexList} />
+    </SearchIconWidget>
+
+    // ...
+  )
+}
+`}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/components/Layout/Header.tsx#L125"
+>
+  <span>See Example Code</span>
+</Button>

@@ -1,0 +1,133 @@
+---
+title: "How to create Product Review in Hydrogen"
+subtitle: "Product reviews are more than just a way for customers to share their opinions. They serve as powerful social proof, influencing the purchasing decisions of potential buyers."
+description: "Product reviews are more than just a way for customers to share their opinions. They serve as powerful social proof, influencing the purchasing decisions of potential buyers. Positive reviews can boost credibility and trust, ultimately leading to increased sales and customer loyalty."
+date: 2023-07-26
+image: "/assets/images/blogs/create-product-review.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["product-review"]
+data-technologies: ["hydrogen"]
+---
+
+export const code1 = `import {Rating} from '@sledge-app/react-product-review';
+// ...
+
+export function Product(){
+  // ...
+
+return (
+// ...
+
+    // place this code bottom of product title
+    <Rating
+      params={{
+        productId: parseGid(product.id).id,
+      }}
+      size="sm"
+    />
+
+    // ...
+
+)
+}`;
+
+export const code2 = `import { Widget, WidgetHeader } from "@sledge-app/react-product-review";
+// ...
+
+export function Product(){
+  // ...
+
+return (
+// ...
+
+    // place this code bottom of product detail
+    <Widget.Root
+      params={{
+        productId: parseGid(product.id).id,
+        productVariantId: parseGid(selectedVariant.id).id,
+      }}
+    >
+      <WidgetHeader>
+        <WidgetHeader.Summary />
+        <WidgetHeader.AddTrigger text="Add review" />
+        <WidgetHeader.Sort />
+      </WidgetHeader>
+      <Widget.List />
+    </Widget.Root>
+
+    // ...
+
+)
+}`;
+
+<RecommendedPosts type="card" autoGenerate/>
+
+## What we’re building
+
+In this tutorial we’ll be learning how to add **_Rating_** and **_Review List Widget_** (including add review form) in product detail page for Shopify Hydrogen.
+<br/>
+<img src="/assets/images/review-list-widget.png" />
+<br />
+<Info content={
+  <>
+  This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://remix.run/" target="_blank">Remix</a>, <a href="https://hydrogen.shopify.dev/" target="_blank">Shopify Hydrogen</a> and has been setup <a href="/blog/how-to-add-sledge-provider-in-shopify-hydrogen" target="_blank">Sledge Provider</a>.
+  </>
+} />
+
+## Install Sledge React Product Review
+
+The first step to do is install the Sledge react product review package,
+run the following command to install Sledge react product review:
+
+<CodeMDX
+  showLineNumber={false}
+  code={`npm install @sledge-app/react-product-review`}
+  withWindow={true}
+  language="shellscript"
+/>
+
+## Add Rating Widget
+
+Rating widget contains information about the average rating and total reviews on a product.
+You can place rating widget on product card and on product detail page, on this occasion we will try to add it to the product detail page.
+
+<br />
+<img src="/assets/images/rating-widget.png" />
+<br />
+
+Open file ***app/routes/products.$handle.tsx*** and add code below:
+<CodeMDX
+  showLineNumber={false}
+  code={code1}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/routes/(%24locale).products.%24id.tsx#L451-L456"
+>
+  <span>See Example Code</span>
+</Button>
+
+<br />
+
+## Add Review List Widget
+
+Review list widget is used to display all reviews that have been written by customers, and in it there is also a form for adding new reviews.
+
+<br />
+Open file ***app/routes/products.$handle.tsx*** and add code below:
+<CodeMDX
+  showLineNumber={false}
+  code={code2}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/328a5e54d57dbb995ba6bd4e2b82c6babd1a28ca/hydrogen/app/routes/(%24locale).products.%24id.tsx#L345-L357"
+>
+  <span>See Example Code</span>
+</Button>

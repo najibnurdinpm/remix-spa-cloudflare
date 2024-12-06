@@ -1,0 +1,172 @@
+---
+title: "How to create Product Review in Next.js Commerce"
+subtitle: "Product reviews are more than just a way for customers to share their opinions. They serve as powerful social proof, influencing the purchasing decisions of potential buyers."
+description: "Product reviews are more than just a way for customers to share their opinions. They serve as powerful social proof, influencing the purchasing decisions of potential buyers. Positive reviews can boost credibility and trust, ultimately leading to increased sales and customer loyalty."
+date: 2023-11-07
+image: "/assets/images/blogs/create-product-review-nextjs.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["product-review"]
+data-technologies: ["next.js"]
+---
+
+export const ratingComponentCode = `"use client";
+
+import { Rating } from "@sledge-app/react-product-review";
+
+type iRatingComponent = {
+  size?: "md" | "sm" | "xs";
+  productId?: any;
+};
+export default function RatingComponent({
+  size = "sm",
+  productId,
+}: iRatingComponent) {
+  return <Rating size={size} params={{ productId }} />;
+}`;
+
+export const code1 = `import RatingComponent from "components/sledge/review/rating";
+// ...
+
+export function ProductPage(){
+  // ...
+
+  return (
+    // ...
+
+    // place this code bottom of product title
+    <RatingComponent size="sm" productId={product.id} />
+
+    // ...
+
+  )
+}`;
+
+export const widgetComponentCode = `"use client";
+
+import { Widget, WidgetHeader } from "@sledge-app/react-product-review";
+
+type IReviewList = {
+  productId: string;
+};
+export default function ReviewWidget({ productId }: IReviewList) {
+  return (
+    <Widget.Root params={{ productId }} >
+      <Widget.Header>
+        <WidgetHeader.Summary />
+        <WidgetHeader.AddTrigger />
+        <WidgetHeader.Sort />
+      </Widget.Header>
+      <Widget.List />
+    </Widget.Root>
+  );
+}`;
+
+export const code2 = `import ReviewWidget from "components/sledge/review/review-widget";
+// ...
+
+export function ProductPage(){
+  // ...
+
+  return (
+    // ...
+
+    // place this code bottom of product detail
+    <ReviewWidget productId={product.id} />
+
+    // ...
+
+  )
+}`;
+
+<RecommendedPosts type="card" autoGenerate/>
+
+## What we’re building
+
+In this tutorial we’ll be learning how to add **_Rating_** and **_Review List Widget_** (including add review form) in product detail page for Next.js Commerce.
+<br />
+<img src="/assets/images/review-list-widget.png" />
+<br />
+
+<Info content={
+  <>
+  This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://nextjs.org/" target="_blank">Next.js</a>, <a href="https://nextjs.org/commerce" target="_blank">Next.js Commerce</a> and has been setup <a href="/blog/how-to-add-sledge-provider-in-shopify-next-js" target="_blank">Sledge Provider</a> for Next.js Commerce.
+  </>
+} />
+
+## Install Sledge React Product Review
+
+The first step to do is install the Sledge react product review package,
+run the following command to install Sledge react product review:
+
+<CodeMDX
+  showLineNumber={false}
+  code={`npm install @sledge-app/react-product-review`}
+  withWindow={true}
+  language="shellscript"
+/>
+
+## Add Rating Widget
+
+Rating widget contains information about the average rating and total reviews on a product.
+You can place rating widget on product card and on product detail page, on this occasion we will try to add it to the product detail page.
+
+<br />
+<img src="/assets/images/rating-widget.png" />
+<br/>
+
+Create file ***components/sledge/review/rating.tsx*** and copy the following code for creating rating component.
+<CodeMDX
+  showLineNumber={false}
+  code={ratingComponentCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+<br />
+Add following code to add RatingComponent to file ***app/product/[handle]/page.tsx***:
+<CodeMDX
+  showLineNumber={false}
+  code={code1}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/app/product/%5Bhandle%5D/page.tsx"
+>
+  <span>See Example Code</span>
+</Button>
+
+## Add Review List Widget
+
+Review list widget is used to display all reviews that have been written by customers, and in it there is also a form for adding new reviews.
+
+<br />
+<img src="/assets/images/review-list-widget.png" />
+<br />
+
+Create file ***components/sledge/review/review-widget.tsx*** and copy the following code for creating review widget component.
+<CodeMDX
+  showLineNumber={false}
+  code={widgetComponentCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+
+<br />
+Add following code to add ReviewWidget component to file ***app/product/[handle]/page.tsx***:
+<CodeMDX
+  showLineNumber={false}
+  code={code2}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/app/product/%5Bhandle%5D/page.tsx"
+>
+  <span>See Example Code</span>
+</Button>

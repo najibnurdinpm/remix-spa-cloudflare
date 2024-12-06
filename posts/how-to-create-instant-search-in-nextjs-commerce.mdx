@@ -1,0 +1,144 @@
+---
+title: "How to create Instant Search in Next.js Commerce"
+subtitle: "Instant search is required in online stores to enhance the user experience, streamline product discovery, reduce friction, and ultimately drive sales and customer satisfaction."
+description: "Instant search is required in online stores to enhance the user experience, streamline product discovery, reduce friction, and ultimately drive sales and customer satisfaction. It has become an essential tool for modern e-commerce websites looking to stay competitive in the market."
+date: 2023-11-08
+image: "/assets/images/blogs/create-instant-search-nextjs.png"
+author: "Hamdan Awaludin"
+authorImage: "/assets/images/author/author-hamdan.jpg"
+data-topics: ["tutorials"]
+data-apps: ["instant-search"]
+data-technologies: ["next.js"]
+---
+
+export const iconComponentCode = `"use client";
+
+import { CustomComponents } from "@sledge-app/core";
+import { SearchIconWidget } from "@sledge-app/react-instant-search";
+import Link from "next/link";
+
+function viewMoreResultButton({ keyword, setShowPopupComponent }: any){
+    return (
+      <Link
+        // fill href with search result page url
+        href={\`/search-result?q=\${keyword}\`}
+        onClick={() => setShowPopupComponent && setShowPopupComponent(false)}
+      >View More Result</Link>
+    );
+}
+
+export default function SearchHeaderMenu() {
+  return (
+    <SearchIconWidget size="sm">
+      <CustomComponents 
+        searchViewMoreResult={ viewMoreResultButton }
+      />
+    </SearchIconWidget>
+  );
+}`;
+
+
+export const searchIconCode = `import SearchHeaderMenu from 'components/sledge/instantsearch/search-header-menu';
+// ...
+
+export function Navbar(){
+  // ...
+
+  return(
+    // ...
+  
+    <SearchHeaderMenu />
+    // ...
+  
+  )
+}`;
+
+export const searchResultCode = `"use client";
+
+import { SearchResultWidget } from "@sledge-app/react-instant-search";
+
+export default function SearchResultPage() {
+  return (
+    <SearchResultWidget
+      query={{
+        keyword: "q",
+      }}
+    />
+  );
+}`;
+
+<RecommendedPosts type="card" autoGenerate/>
+
+## What we’re building
+In this tutorial we’ll be learning how to add instant search icon popup on header menu and search result page for Next.js Commerce.
+
+<br />
+<img src="/assets/images/blogs/wishlist-badge.png" />
+<br />
+<img src="/assets/images/blogs/search-result.png" />
+
+<br />
+<Info content={
+  <>
+  This guide assumes that you’re already familiar with <a href="https://react.dev/" target="_blank" >React</a>, <a href="https://nextjs.org/" target="_blank">Next.js</a>, <a href="https://nextjs.org/commerce" target="_blank">Next.js Commerce</a> and has been setup <a href="/blog/how-to-add-sledge-provider-in-shopify-next-js" target="_blank">Sledge Provider</a> for Next.js Commerce.
+  </>
+} />
+
+## Install sledge react instant search
+The first step to do is install the Sledge react instant search package,
+run the following command to install Sledge react instant search:
+
+<CodeMDX
+  showLineNumber={false}
+  code={`npm install @sledge-app/react-instant-search`}
+  withWindow={true}
+  language="shellscript"
+/>
+
+## Add search icon popup
+Then we need to add a popup search icon into the header menu as a trigger to open the popup search widget.<br/>
+<br />
+<img src="/assets/images/blogs/wishlist-badge.png" />
+<br />
+Create file ***components/sledge/instantsearch/search-header-menu.tsx*** and copy the following code for creating search header menu component:
+<CodeMDX
+  showLineNumber={false}
+  code={iconComponentCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+Add the following code to header menu component:
+<CodeMDX
+  showLineNumber={false}
+  code={searchIconCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/components/layout/navbar/index.tsx"
+>
+  <span>See Example Code</span>
+</Button>
+
+<br />
+
+## Add search result widget
+Finally we need to create a new page to display search results. <br/>
+<br />
+<img src="/assets/images/blogs/search-result.png" />
+<br />
+Create file ***app/search-result/page.tsx*** and copy the following code for creating search result page:
+<CodeMDX
+  showLineNumber={false}
+  code={searchResultCode}
+  withWindow={true}
+  language="javascript"
+/>
+
+<Button
+  to="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/components/sledge/instantsearch/search-result-page.tsx"
+>
+  <span>See Example Code</span>
+</Button>
