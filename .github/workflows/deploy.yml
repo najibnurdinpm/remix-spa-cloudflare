@@ -1,22 +1,15 @@
 name: Windows Deployment Workflow
 
-# Kontrol kapan workflow akan dijalankan
 on:
-  # Akan dijalankan saat push ke branch main
   push:
     branches: [ "main" ]
-  
-  # Memungkinkan manual trigger workflow dari Actions tab
-  workflow_dispatch:
 
-# Daftar job yang akan dijalankan
 jobs:
   deploy:
-    # Gunakan Windows sebagai runner
     runs-on: windows-latest
 
     steps:
-    # Checkout kode dari repository
+      
     - uses: actions/checkout@v3
     - run: npm install
     - run: npm run build
@@ -27,7 +20,6 @@ jobs:
           projectName: nextra-test-cloudflare
           directory: build/client
 
-    # Setup Node.js (jika diperlukan)
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
