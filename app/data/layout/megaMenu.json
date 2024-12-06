@@ -1,0 +1,92 @@
+[
+    {
+        "id": 0,
+        "title": "All Apps",
+        "url": "/apps",
+        "isDropdownOpen": false,
+        "subMenu": [
+            {
+                "title": "Wishlist",
+                "url": "/apps/wishlist"
+            },
+            {
+                "title": "Product Review",
+                "url": "/apps/review"
+            },
+            {
+                "title": "Instant Search",
+                "url": "/apps/instant-search"
+            },
+            {
+                "title": "Product Filters",
+                "url": "/apps/product-filters"
+            },
+            {
+                "title": "Upcoming Apps",
+                "url": "/apps/upcoming"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "title": "Tech Stack",
+        "url": "/tech-stacks",
+        "isDropdownOpen": false,
+        "subMenu": [
+            {
+                "title": "Hydrogen",
+                "url": "/tech-stacks/hydrogen"
+            },
+            {
+                "title": "Next.js",
+                "url": "/tech-stacks/next"
+            },
+            {
+                "title": "Liquid",
+                "url": "/tech-stacks/shopify"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Demo",
+        "url": "/",
+        "isDropdownOpen": false,
+        "subMenu": [
+            {
+                "title": "Hydrogen",
+                "url": "https://demo-hydrogen.sledge-app.com/",
+                "target": "_blank"
+            },
+            {
+                "title": "Next.js",
+                "url": "https://demo-nextjs.sledge-app.com/",
+                "target": "_blank"
+            },
+            {
+                "title": "Liquid",
+                "url": "https://sledge-demo-store.myshopify.com/",
+                "target": "_blank"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Documentation",
+        "url": "http://docs.sledge-app.com/",
+        "isDropdownOpen": false,
+        "subMenu": []
+    },
+    {
+        "id": 4,
+        "title": "Supports",
+        "url": "/support",
+        "isDropdownOpen": false,
+        "subMenu": [
+            {
+                "title": "FAQ",
+                "url": "/supports/faq"
+            }
+        ]
+    }
+]

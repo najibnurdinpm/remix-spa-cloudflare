@@ -1,0 +1,62 @@
+{
+    "/": {
+        "title": "Sledge - One Shopify App. Works on various stacks.",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using your preferred tech stacks — in just a few minutes."
+    },
+    "/apps/review": {
+        "title": "Product Review",
+        "description": "Show the best review of your products with the easy and customizable product review widgets to gain customer trust and boost your store sales."
+    },
+    "/apps/wishlist": {
+        "title": "Wishlist",
+        "description": "Increase engagement and sales on your stores by allowing customers to save their desired products for later."
+    },
+    "/apps/instant-search": {
+        "title": "Instant Search",
+        "description": "Personalized and customized instant search widgets that fit with the look and feel of your brand."
+    },
+    "/apps/product-filters": {
+        "title": "Product Filters",
+        "description": "Instantly integrate a smart product filters on any pages including collections and search result pages."
+    },
+    "/apps/upcoming": {
+        "title": "Upcoming Apps",
+        "description": "Instant Search, product filters, wishlist, product review, what else? Sledge will keep adding new features, see what we're cooking below."
+    },
+    "/tech-stacks/hydrogen": {
+        "title": "Hydrogen Integration",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using Hydrogen — in just a few minutes."
+    },
+    "/tech-stacks/next": {
+        "title": "Next Integration",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using Next.js Commerce — in just a few minutes."
+    },
+    "/tech-stacks/shopify": {
+        "title": "Liquid Integration",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using Shopify Liquid — in just a few minutes."
+    },
+    "/tech-stacks/webflow": {
+        "title": "Webflow Integration",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using Webflow — in just a few minutes."
+    },
+    "/supports": {
+        "title": "Supports",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using your preferred tech stacks — in just a few minutes."
+    },
+    "/supports/faq": {
+        "title": "FAQ",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using your preferred tech stacks — in just a few minutes."
+    },
+    "/supports/privacy-policy": {
+        "title": "Privacy Policy",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using your preferred tech stacks — in just a few minutes."
+    },
+    "/supports/terms-conditions": {
+        "title": "Terms & Conditions",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using your preferred tech stacks — in just a few minutes."
+    },
+    "/blog": {
+        "title": "Blog",
+        "description": "Build instant search, product filters, wishlist, product review, etc. for your store using your preferred tech stacks — in just a few minutes."
+    }
+}

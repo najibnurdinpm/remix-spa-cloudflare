@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: cabinet-grotesk;
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+    src: url("fonts/CabinetGrotesk/CabinetGrotesk-Variable.woff2");
+  }
+
+  @font-face {
+    font-family: inter;
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+    src: url("fonts/Inter/Inter-Regular.woff2");
+  }
+
+  @font-face {
+    font-family: inter;
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+    src: url("fonts/Inter/Inter-Medium.woff2");
+  }
+
+  @font-face {
+    font-family: inter;
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+    src: url("fonts/Inter/Inter-Bold.woff2");
+  }
+
+  @font-face {
+    font-family: inter;
+    font-weight: 800;
+    font-display: swap;
+    font-style: normal;
+    src: url("fonts/Inter/Inter-ExtraBold.woff2");
+  }
+
+  @font-face {
+    font-family: fira-code;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/FiraCode/FiraCode-Regular.woff2");
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+@layer components {
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  pre {
+    overflow: scroll;
+  }
+
+  pre code {
+    font-family: fira-code;
+    font-size: 14px;
+    position: relative;
+  }
+
+  pre code {
+    counter-reset: step;
+    counter-increment: step 0;
+  }
+
+  pre.css-variables {
+    overflow: hidden;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .preview-code pre code {
+    counter-reset: line;
+    overflow-wrap: break-word;
+    display: grid;
+  }
+
+  .preview-code pre code span.line::before {
+    counter-increment: line;
+    content: counter(line);
+    float: left;
+    text-align: right;
+    color: #607b96;
+    min-width: 2.6rem;
+    height: 100%;
+    padding-right: 1rem;
+  }
+
+  .preview-code pre code span.line {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  :root {
+    --shiki-color-text: #9c9c9c;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #439fc6;
+    --shiki-token-string: #f8ffae;
+    --shiki-token-comment: #d9d9d9;
+    --shiki-token-keyword: #43c6ac;
+    --shiki-token-parameter: #ff5656;
+    --shiki-token-function: #9560d8;
+    --shiki-token-string-expression: #f8ffae;
+    --shiki-token-punctuation: #212121;
+    --shiki-token-link: #f8ffae;
+  }
+
+  ::selection {
+    color: white;
+    background: #3aa38e;
+  }
+
+  input:checked + div {
+    @apply border-transparent;
+  }
+
+  input:checked + div svg {
+    @apply block;
+  }
+
+  .blog-content h2 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 45px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    margin-bottom: 16px;
+    margin-top: 48px;
+  }
+
+  .blog-content p {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #9c9c9c;
+  }
+
+  .blog-content .mdx-code {
+    margin: 16px 0 32px;
+  }
+
+  .blog-content a {
+    text-decoration: underline;
+  }
+
+  input[type="checkbox"]:checked {
+    background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.51276 7.41252L0.246094 4.14585L0.873177 3.51877L3.51276 6.15835L9.11276 0.55835L9.73984 1.18543L3.51276 7.41252Z' fill='%23F8FFAE'/%3E%3C/svg%3E ");
+    background-size: 10px;
+  }
+
+  .bubble {
+    position: relative;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+  }
+  .bubble:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-color: red transparent;
+    border-width: 10px 11px 0;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -11px;
+  }
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .backdrop-filter-custom {
+    backdrop-filter: opacity(100%);
+    -webkit-transform: translateZ(0);
+    transform:translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective:1000;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+
+  [type="checkbox"]:focus, [type="radio"]:focus {
+    --tw-ring-offset-width: 0px !important;
+  }
+}

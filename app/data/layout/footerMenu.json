@@ -1,0 +1,96 @@
+[
+    {
+        "title": "All Apps",
+        "url": "/all-apps",
+        "subMenu": [
+            {
+                "title": "Wishlist",
+                "url": "/apps/wishlist",
+                "isNew": false
+            },
+            {
+                "title": "Product Review",
+                "url": "/apps/review",
+                "isNew": false
+            },
+            {
+                "title": "Instant Search",
+                "url": "/apps/instant-search",
+                "isNew": false
+            },
+            {
+                "title": "Product Filters",
+                "url": "/apps/product-filters",
+                "isNew": false
+            }
+        ]
+    },
+    {
+        "title": "Tech Stack",
+        "url": "/tech-stacks",
+        "subMenu": [
+            {
+                "title": "Hydrogen",
+                "url": "/tech-stacks/hydrogen",
+                "isNew": false
+            },
+            {
+                "title": "Next.js",
+                "url": "/tech-stacks/next",
+                "isNew": false
+            },
+            {
+                "title": "Liquid",
+                "url": "/tech-stacks/shopify",
+                "isNew": false
+            },
+            {
+                "title": "Webflow",
+                "url": "/tech-stacks/webflow",
+                "isNew": false
+            }
+        ]
+    },
+    {
+        "title": "Resources",
+        "url": "/resources",
+        "subMenu": [
+            {
+                "title": "Documentation",
+                "url": "http://docs.sledge-app.com/",
+                "isNew": false
+            },
+            {
+                "title": "FAQ",
+                "url": "/supports/faq",
+                "isNew": false
+            }
+        ]
+    },
+    {
+        "title": "Demo",
+        "url": "/",
+        "subMenu": [
+            {
+                "title": "Hydrogen",
+                "url": "https://demo-hydrogen.sledge-app.com/",
+                "target": "_blank"
+            },
+            {
+                "title": "Next.js",
+                "url": "https://demo-nextjs.sledge-app.com/",
+                "target": "_blank"
+            },
+            {
+                "title": "Liquid",
+                "url": "https://sledge-demo-store.myshopify.com/",
+                "target": "_blank"
+            },
+            {
+                "title": "Webflow",
+                "url": "https://demo-webflow.sledge-app.com/",
+                "target": "_blank"
+            }
+        ]
+    }
+]

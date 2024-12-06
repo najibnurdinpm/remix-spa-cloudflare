@@ -1,6 +1,7 @@
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 declare module "@remix-run/node" {
   interface Future {
@@ -20,6 +21,16 @@ export default defineConfig({
         v3_lazyRouteDiscovery: true,
       },
     }),
+    nodePolyfills({
+      // Include node polyfills
+      include: ['node'],
+      // Tambahkan polyfill untuk protokol node:
+      protocolImports: true
+
+    }),
     tsconfigPaths(),
   ],
+  optimizeDeps: {
+    exclude: ['@resvg/resvg-js']
+  },
 });
