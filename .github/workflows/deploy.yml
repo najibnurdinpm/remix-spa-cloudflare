@@ -1,4 +1,4 @@
-name: Windows Deployment Workflow
+name: Remix SPA Cloudflare
 
 on:
   push:
@@ -6,19 +6,17 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: npm install
-    - run: npm run build
-    - uses: cloudflare/pages-action@v1
-    with:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+      - run: npm run build
+      - uses: cloudflare/pages-action@v1
+        with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: nextra-test-cloudflare
+          projectName: remix-spa-cloudflare
           directory: build/client
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.12.0'
