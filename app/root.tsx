@@ -13,6 +13,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useLocation,
   useRouteError,
 } from "@remix-run/react";
@@ -24,10 +25,16 @@ import { dynamicMeta } from "~/utils/dynamicMeta";
 import * as gtag from "~/utils/gtags.client";
 import { useEffect } from "react";
 
-export const meta: V2_MetaFunction = () => {
-  const location = useLocation();
+// export const loader = async ({ request }: LoaderArgs) => {
+//   const { origin } = new URL(request.url);
+//   const baseUrl = origin;
+//   const gaTrackingId = process.env.GA_TRACKING_ID;
+//   return json({ baseUrl, gaTrackingId });
+// };
 
-  return dynamicMeta(location, window.location.origin);
+export const meta: V2_MetaFunction = ({ location, data }: any) => {
+  const baseUrl = window.location.origin;
+  return dynamicMeta(location, baseUrl);
 };
 
 export const links: LinksFunction = () => [
@@ -46,14 +53,14 @@ export const links: LinksFunction = () => [
 
 export default function App() {
   const location = useLocation();
-  const gaTrackingId = import.meta.env.VITE_GA_TRACKING_ID; // Misalnya menggunakan environment variable
+  // const { gaTrackingId } = useLoaderData<typeof loader>();
+  const gaTrackingId = process.env.GA_TRACKING_ID;
 
   useEffect(() => {
     if (gaTrackingId?.length) {
       gtag.pageview(location.pathname, gaTrackingId);
     }
   }, [location, gaTrackingId]);
-
 
   return (
     <html lang="en">
