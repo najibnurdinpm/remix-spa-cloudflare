@@ -10,6 +10,7 @@ npx create-remix@latest --template remix-run/remix/templates/spa
 
 ## Development
 
+
 You can develop your SPA app just like you would a normal Remix app, via:
 
 ```shellscript
